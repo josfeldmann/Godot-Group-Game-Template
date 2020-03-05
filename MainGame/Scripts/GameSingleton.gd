@@ -15,7 +15,7 @@ func LoseGame():
 	miniManager.LoseGame()
 	
 func WinGame():
-	miniManager.WinGame()
+	miniManager.WinGame(100)
 
 
 # Called when the node enters the scene tree for the first time.

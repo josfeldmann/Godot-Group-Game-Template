@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MainGame/Sprites/100pxSquare.png" type="Texture" id=1]
-[ext_resource path="res://MainGame/MiniGameManager.gd" type="Script" id=2]
+[ext_resource path="res://MainGame/Scripts/MiniGameManager.gd" type="Script" id=2]
 [ext_resource path="res://MainGame/Sprites/heart pixel art 254x254.png" type="Texture" id=3]
 
 [node name="MiniGameManager" type="Node2D"]

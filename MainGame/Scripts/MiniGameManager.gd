@@ -14,7 +14,8 @@ onready var timeInBetweenPrompts: float = 3
 onready var timeForTransition : float = 3
 onready var currentTimer: float = 0;
 onready var currentTimeLimit :  float  = 0
-onready var hp: int = 20;
+onready var hp: int = 10;
+onready var points: int = 0;
 
 
 
@@ -40,7 +41,7 @@ func _ready():
 	
 	
 	GameSingleton.SetManager(self)
-	gameList = [ ["Press 1 prompt","res://ExampleGame1/ExampleScene1.tscn"] ]
+	gameList = [ ["Press the spacebar","res://ExampleGame1/ExampleScene1.tscn"] ]
 	GetNewGame()
 	
 	
@@ -80,13 +81,15 @@ func StartNewGame():
 	
 	pass
 	
-func WinGame(var points):
+func WinGame(var pts):
 
 	currentGameNode.free()
 	state = GameState.TRANSITION
 	currentTimer = timeForTransition
 	timerBar.value = 0
-	pointsText.val
+	points += pts
+	pointsHolder.show()
+	pointsText.set_text("Points: " + str(points))
 
 
 	pass
@@ -96,6 +99,7 @@ func LoseGame():
 	currentGameNode.free()
 	hp -= 1
 	HPFlash.show()
+	HPFlashText.set_text("HP: " + str(hp))
 	state = GameState.TRANSITION
 	currentTimer = timeForTransition
 	timerBar.value = 0
