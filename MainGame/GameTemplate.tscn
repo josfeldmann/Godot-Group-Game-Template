@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://MainGame/Sprites/100pxSquare.png" type="Texture" id=1]
+[ext_resource path="res://MainGame/MiniGameManager.gd" type="Script" id=2]
+[ext_resource path="res://MainGame/Sprites/heart pixel art 254x254.png" type="Texture" id=3]
+
+[node name="MiniGameManager" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TimerLoadingBar" type="TextureProgress" parent="."]
+margin_right = 1024.0
+margin_bottom = 50.0
+max_value = 100.0
+texture_under = ExtResource( 1 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+fill_mode = 1
+tint_under = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+tint_over = Color( 1, 1, 1, 0 )
+tint_progress = Color( 0.858824, 0.180392, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FlashHP" type="Node2D" parent="."]
+position = Vector2( 512, 300 )
+
+[node name="HPText" type="Label" parent="FlashHP"]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "HP: 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="FlashHP"]
+position = Vector2( -0.526367, -39.4738 )
+scale = Vector2( 0.191877, 0.183589 )
+texture = ExtResource( 3 )
+
+[node name="AttachGameHere" type="Node2D" parent="."]
+
+[node name="Prompt" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 494.973
+margin_top = 269.695
+margin_right = 538.973
+margin_bottom = 283.695
+text = "BOP IT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
