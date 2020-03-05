@@ -1,11 +1,15 @@
 extends Node2D
 
 
-onready var HealthBar = $TimerLoadingBar
+onready var timerBar = $TimerLoadingBar
 onready var HPFlash = $FlashHP
 onready var HPFlashText = $FlashHP/HPText
-onready var Prompt = $Prompt
+onready var prompt = $Prompt
 onready var gameSpot = $AttachGameHere
+onready var pointsHolder = $Points
+onready var pointsText = $Points/PointsText
+ 
+
 onready var timeInBetweenPrompts: float = 3
 onready var timeForTransition : float = 3
 onready var currentTimer: float = 0;
@@ -51,8 +55,9 @@ func GetNewGame():
 	currentPromptString = gameList[0][0]
 	currentScenePath = gameList[0][1]
 	HPFlash.hide()
-	Prompt.show()
-	Prompt.text = currentPromptString
+	pointsHolder.hide()
+	prompt.show()
+	prompt.text = currentPromptString
 	state = GameState.PROMPT
 	currentTimer = timeInBetweenPrompts
 	
@@ -64,10 +69,10 @@ func GetNewGame():
 func StartNewGame():
 	
 	state = GameState.MINIGAME
-	Prompt.hide()
+	prompt.hide()
 	currentTimeLimit = 5
 	currentTimer = 5
-	HealthBar.value = 100;
+	timerBar.value = 0
 	var scene = load(gameList[0][1])
 	currentGameNode = scene.instance()
 	gameSpot.add_child(currentGameNode)
@@ -75,11 +80,13 @@ func StartNewGame():
 	
 	pass
 	
-func WinGame():
+func WinGame(var points):
 
 	currentGameNode.free()
 	state = GameState.TRANSITION
 	currentTimer = timeForTransition
+	timerBar.value = 0
+	pointsText.val
 
 
 	pass
@@ -91,7 +98,7 @@ func LoseGame():
 	HPFlash.show()
 	state = GameState.TRANSITION
 	currentTimer = timeForTransition
-	
+	timerBar.value = 0
 	
 	
 	pass
@@ -108,7 +115,7 @@ func _process(delta):
 	elif state == GameState.MINIGAME :
 		print("MiniGame " + str(currentTimer))
 		currentTimer -= delta
-		HealthBar.value = currentTimer/currentTimeLimit * 100
+		timerBar.value = currentTimer/currentTimeLimit * 100
 		if (currentTimer <= 0):
 			LoseGame()
 	elif state == GameState.TRANSITION:

@@ -10,7 +10,6 @@ script = ExtResource( 2 )
 [node name="TimerLoadingBar" type="TextureProgress" parent="."]
 margin_right = 1024.0
 margin_bottom = 50.0
-max_value = 100.0
 texture_under = ExtResource( 1 )
 texture_over = ExtResource( 1 )
 texture_progress = ExtResource( 1 )
@@ -52,6 +51,19 @@ margin_top = 269.695
 margin_right = 538.973
 margin_bottom = 283.695
 text = "BOP IT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Points" type="Node2D" parent="."]
+position = Vector2( 511.999, 358.999 )
+
+[node name="PointsText" type="Label" parent="Points"]
+margin_left = -21.0523
+margin_top = -11.5192
+margin_right = 34.9477
+margin_bottom = 2.48083
+text = "Points: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
