@@ -16,6 +16,8 @@ onready var currentTimer: float = 0;
 onready var currentTimeLimit :  float  = 0
 onready var hp: int = 10;
 onready var points: int = 0;
+onready var currentMiniGameIndex = 0;
+onready var numberOfMiniGames = 0;
 
 
 
@@ -41,7 +43,12 @@ func _ready():
 	
 	
 	GameSingleton.SetManager(self)
-	gameList = [ ["Press the spacebar","res://ExampleGame1/ExampleScene1.tscn"] ]
+	numberOfMiniGames = gameList.size()
+	gameList = [["Press the spacebar","res://ExampleGame1/ExampleScene1.tscn"],
+				["Press Left", "res://ExampleGame2/PressLeft.tscn"]
+				
+				]
+	currentMiniGameIndex = 0
 	GetNewGame()
 	
 	
@@ -53,14 +60,19 @@ func _ready():
 func GetNewGame():
 	
 	
-	currentPromptString = gameList[0][0]
-	currentScenePath = gameList[0][1]
+	
+	currentPromptString = gameList[currentMiniGameIndex][0]
+	currentScenePath = gameList[currentMiniGameIndex][1]
 	HPFlash.hide()
 	pointsHolder.hide()
 	prompt.show()
 	prompt.text = currentPromptString
 	state = GameState.PROMPT
 	currentTimer = timeInBetweenPrompts
+	currentMiniGameIndex = currentMiniGameIndex + 1
+	
+	if (currentMiniGameIndex >= numberOfMiniGames):
+		currentMiniGameIndex = 0
 	
 	
 	pass
@@ -74,7 +86,7 @@ func StartNewGame():
 	currentTimeLimit = 5
 	currentTimer = 5
 	timerBar.value = 0
-	var scene = load(gameList[0][1])
+	var scene = load(currentScenePath)
 	currentGameNode = scene.instance()
 	gameSpot.add_child(currentGameNode)
 	
